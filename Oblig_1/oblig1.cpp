@@ -2,7 +2,8 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <cmath>
-#include "windows.h"
+#include <windows.h>
+#include <string>
 
 /*
 	Obligatorisk innlevering 1 i C++
@@ -38,7 +39,7 @@ bool meny()
 		{
 			cout << "\nDu har valgt oppgave 1: Kulevolum" << endl;
 			cout << "(4/3) * PI * radius^3\n" << endl;
-			cout << "Skriv inn radius for å beregne kulevolum:" << endl;
+			cout << "Skriv inn radius for " << (char)134 << " beregne kulevolum:" << endl;
 			float radius;
 		
 			cin >> radius;
@@ -145,7 +146,7 @@ bool meny()
 	
 			cout << "------------------------------------------------------------------" << endl;
 			cout << "Terminbel" << (char)155 << "p: " << terminbelop << endl;
-			cout << (char)134 << "r	Terminbel" << (char)143 << "p	Renter	Avdrag	Restgjeld" << endl;
+			cout << (char)143 << "r	Terminbel" << (char)155 << "p	Renter	Avdrag	Restgjeld" << endl;
 			cout << "------------------------------------------------------------------" << endl;
 		
 			for (int i = 1; i <= år; i++)
@@ -177,10 +178,73 @@ bool meny()
 		else if (valg == '5')
 		{
 			cout << "Du valgte oppgave 5: Tall som tekst" << endl;
-			cout << "Skriv inn et tall f.o.m. 0 t.o.m. 1000" << endl;
-			int tall;
-			cin >> tall;
+			cout << "Skriv inn et tall f.o.m. 0 t.o.m. 1000\n" << endl;
+			
+			// bruker input
+			string numStr;
 
+			bool isNegative = false;
+
+			// navnene til tallene
+			string onesName[] = { "en", "to", "tre", "fire", "fem", "seks", "syv", "åtte", "ni" };
+			string teensName[] = { "ti", "elve", "tolv", "tretten", "fjorten", "femten", "seisten", "sotten", "atten", "nitten" };
+			string tensName[] = { "tjue", "tretti", "førti", "femti", "seksti", "søtti", "åtti", "nitti" };
+
+			cout << "Tall: "; cin >> numStr;
+
+			if( numStr[0] == '-' )
+			{
+				isNegative = true;
+				numStr.erase(0,1);
+			}
+			else
+				isNegative = false;
+
+			// valideringsprosess
+			bool isValid = true;
+			for( unsigned int i = 0; i < numStr.size(); ++i )
+            if( numStr[i] < '0' || numStr[i] > '9' )
+            {
+                isValid = false;
+                break;
+            }
+			if( !isValid )
+			{
+				cout << "Du skrev ikke inn tall.." << endl;
+			}
+
+			if( numStr.size() > 66 )
+			{
+				cout << "Tallet er for stort!" << endl;
+			}
+
+			while( numStr.size()%3 != 0 )
+            numStr = '0' + numStr;
+
+			if( isNegative ) cout << "negativ ";
+
+			for( unsigned int i = 0; i < numStr.size(); i += 3 )
+			{
+				if( numStr[i] == '0' && numStr[i+1] == '0' && numStr[i+2] == '0' )
+                continue;
+
+				if( numStr[i + 0] > '0' )
+				cout << onesName[ numStr[i + 0] - '0' - 1 ] << " hundre ";
+
+				if( numStr[i + 1] == '0' || numStr[i + 1] > '1' )
+				{
+					if( numStr[i + 1] > '1' ) cout << tensName[ numStr[i + 1] - '0' - 2 ] << " ";
+					if( numStr[i + 2] > '0' ) cout << onesName[ numStr[i + 2] - '0' - 1 ] << " ";
+				}
+				else
+                cout << teensName[ numStr[i + 2] - '0' ] << " ";
+
+				// Navngir faktor av 1,000
+				unsigned int j = ( numStr.size() - i )/3;
+				if( j == 2 ) cout << "tussen ";
+            
+			}
+			cout << "\n" << endl;
 			// gå tilbake til meny
 			meny();
 		}
