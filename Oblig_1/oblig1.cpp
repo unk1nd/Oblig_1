@@ -1,20 +1,33 @@
-#include <iostream>
+Ôªø#include <iostream>
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <cmath>
+
+/*
+	Obligatorisk innlevering 1 i C++
+	av Mikael Bendiksen og Lisa Marie S√∏rensen
+	15.02.2012
+	H√∏gskolen i Narvik
+*/
+
 
 using namespace std;
 
 bool meny()
 {
-	cout << "Hovedmeny" << endl;
+	cout << "\n------------------------------------" << endl;
+	cout << "		Hovedmeny" << endl;
+	cout << "------------------------------------" << endl;
 	cout << "Velg en oppgave:\n" << endl;
 	cout << "1. Kulevolum" << endl;
 	cout << "2. Annengradslikning" << endl;
 	cout << "3. Avstand mellom geografiske punkter" << endl;
 	cout << "4. Annuitetsl" << (char)134 << "n" << endl;
 	cout << "5. Tall som tekst" << endl;
+	cout << "------------------------------------" << endl;
+	cout << "9. Om programmet" << endl;
 	cout << "0. Avslutt\n" << endl;
+	cout << "------------------------------------" << endl;
 
 	char valg;
 	cin >> valg;
@@ -22,35 +35,19 @@ bool meny()
 	// OPPGAVE_1: Kulevolum
 	if (valg == '1') 
 	{
-		// V= 4/3*PI*R^3
-		cout << "Du har valgt oppgave 1: Kulevolum" << endl;
+		cout << "\nDu har valgt oppgave 1: Kulevolum" << endl;
 		cout << "(4/3) * PI * radius^3\n" << endl;
-		cout << "Skriv inn radius for Â beregne kulevolum:" << endl;
+		cout << "Skriv inn radius for √• beregne kulevolum:" << endl;
 		float radius;
 		
 		cin >> radius;
-		
-		//NB UTREGNING BLIR FEIL, FINN UT HVORFOR!!!!!!!!!!!!!!!!!!!! pow(radius,3) evt fÂ med if-setningen for Â skjekke om input er over 0
-		cout << "Volumet til kulen blir: " << (1.333) * M_PI * pow(radius,3) << endl; 
-		/*if (radius > 0)
-		{
-			double volum;
-			cout.precision(2);
-			volum = 4/3 * M_PI * pow(radius,3);
-			return volum;
-			cout << "Volumet til kulen blir: " << volum << endl;
-		}
-		else
-		{
-			cout << "Er tallet ditt positivt?" << endl;	
-		}*/
-		
+		cout << "\nVolumet til kulen blir: " << (1.333) * M_PI * pow(radius,3) << endl; 		
 	}
 
 	// OPPGAVE_2: Annengradslikning
 	else if (valg == '2')
 	{
-		cout << "Du valgte oppgave 2: Annengradslikning" << endl;
+		cout << "\nDu valgte oppgave 2: Annengradslikning" << endl;
 		cout << "aX^2 + bX + c\n" << endl;
 
 		float a, b, c;
@@ -63,13 +60,13 @@ bool meny()
 
 		if (a==0)
 		{
-			cout << "Likningen er ikke annengrads, l" << (char)155 << "sningen er: " << -c/b << endl; 
+			cout << "\nLikningen er ikke annengrads, l" << (char)155 << "sningen er: " << -c/b << endl; 
 		}
 		else
 		{
 			if (z < 0)
 			{
-				cout << "R" << (char)155 << "ttene er imagin" << (char)145 << "re." << endl;
+				cout << "\nR" << (char)155 << "ttene er imagin" << (char)145 << "re." << endl;
 			}
 			else
 			{
@@ -77,25 +74,27 @@ bool meny()
 				cout << "x2 = " << (-b - sqrt(z))/(2*a) << endl;
 			}
 		}
+
+		// g√• tilbake til meny
+		meny();
 	}
 
 	// OPPGAVE_3: Avstand mellom geografiske punkter (Haversine Formula)
 	else if (valg == '3')
 	{
-		cout << "Du valgte oppgave 3: Avstand mellom geografiske punkter" << endl;
+		cout << "\nDu valgte oppgave 3: Avstand mellom geografiske punkter" << endl;
 		double lat1,lat2,long2,long1;
-		//double lat1=45.54243333333333,lat2=45.53722222,long1=-122.96045277777778,long2=-122.9630556;
 		
-		cout << "Skriv inn latitude pÂ punkt1" << endl;
+		cout << "\nSkriv inn latitude p" << (char)134 << " punkt1" << endl;
 		cin >> lat1;
 
-		cout << "Skriv inn longitude pÂ punkt1" << endl;
+		cout << "\nSkriv inn longitude p" << (char)134 << " punkt1" << endl;
 		cin >> long1;
 
-		cout << "Skriv inn latitude pÂ punkt2" << endl;
+		cout << "\nSkriv inn latitude p" << (char)134 << " punkt2" << endl;
 		cin >> lat2;
 
-		cout << "Skriv inn longitude pÂ punkt2" << endl;
+		cout << "\nSkriv inn longitude p" << (char)134 << " punkt2" << endl;
 		cin >> long2;
 
 		double PI = 4.0*atan(1.0);
@@ -115,64 +114,58 @@ bool meny()
 		const double earth=6378.137;
         double distance=earth*cHarv;
 		
-		cout << "Avstanden er pÂ: " << distance << " km" << endl;
+		cout << "\nAvstanden er p" << (char)134 << ": " << distance << " km." << endl;
 
-		/*		double hgrad1, hgrad2, bgrad1, bgrad2, avstand; //hgrad=h¯ydegrad, bgrad=breddegrad
-		const double radiusJord = 6378.137; //i km
-
-		cout << "Skriv inn punkt 1:" << endl;
-		cin >> hgrad1 >> bgrad1;
-		
-		cout << "Skriv inn punkt 2:" << endl;
-		cin >> hgrad2 >> bgrad2;
-
-		double ahgrad1 = hgrad1*(M_PI/180);
-		double abgrad1 = bgrad1*(M_PI/180);
-		double ahgrad2 = hgrad2*(M_PI/180);
-		double abgrad2 = bgrad2*(M_PI/180);
-
-		double aBgrad = abgrad1 - abgrad2;
-		double aHgrad = ahgrad1 - ahgrad2;
-		
-		double aHarv = pow(sin(aHgrad/2.0),2.0)+cos(ahgrad1)*cos(ahgrad2)*pow(sin(aBgrad/2),2);
-		double cHarv = 2*atan2(sqrt(aHarv),sqrt(1.0-aHarv));
-
-		avstand = radiusJord*cHarv;
-
-		printf("Avstanden mellom (%d, %d) og (%d, %d) er %d", hgrad1, bgrad1, hgrad2, bgrad2, avstand);
-
-		/*double aHarv= pow(sin(dLat/2.0),2.0)+cos(dlat1)*cos(dlat2)*pow(sin(dLong/2),2);
-        double cHarv=2*atan2(sqrt(aHarv),sqrt(1.0-aHarv));
-
-
-        //earth's radius from wikipedia varies between 6,356.750 km ó 6,378.135 km (ò3,949.901 ó 3,963.189 miles)
-        //The IUGG value for the equatorial radius of the Earth is 6378.137 km (3963.19 mile)
-
-        const double earth=3963.19;//I am doing miles, just change this to radius in kilometers to get distances in km
-        double distance=earth*cHarv;*/
-
+		// g√• tilbake til meny
+		meny();
 	}
 
-	// OPPGAVE_4: AnnuitetslÂn
+	// OPPGAVE_4: Annuitetsl√•n
 	else if (valg == '4')
 	{
-		cout << "Du valgte oppgave 4: AnnuitetslÂn" << endl;
-		cout << "Oppgi startlÂn, rente(i %) og antall Âr: " << endl;
-		double startlÂn, rente, terminbelop;
-		int Âr;
+		cout << "\nDu valgte oppgave 4: Annuitetsl" << (char)134 << "n" << endl;
+		cout << "Oppgi startl" << (char)134 << "n, rente(i %) og antall " << (char)134 << "r: " << endl;
+
+		double startl√•n, rente, renteprosent, terminbelop, rentesum, avdrag;
+		int √•r;
+
+		cout << "\nSkriv inn L" << (char)134 << "nebel" << (char)155 << "p" << endl;
+		cin >> startl√•n;
+
+		cout << "\nSkriv inn rentesats i prosent" << endl;
+		cin >> renteprosent;
 		
+		cout << "\nSkriv inn antall " << (char)134 << "r" << endl;
+		cin >> √•r;
   
-		//rente = rente/100;
-		// T = terminbelop, L = startlÂn, T = L * (p%) * ((1+p%)^n / (1+p%)^n -1) 
-		terminbelop = startlÂn * rente * ((pow(1+rente,Âr)) / (pow(1+rente,Âr))-1);
-
-		printf("Terminbelop = %d",terminbelop);
-		printf("Aar		Terminbelop		Renter	Avdrag			Restgjeld");
+		rente = renteprosent/100;
+		terminbelop = startl√•n * rente * ((pow(1+rente,√•r)) / (pow(1+rente,√•r)-1));
+		double resterl√•n = startl√•n;
+	
+		cout << "------------------------------------------------------------------" << endl;
+		cout << "Terminbel" << (char)155 << "p: " << terminbelop << endl;
+		cout << (char)134 << "r	Terminbel" << (char)155 << "p	Renter	Avdrag	Restgjeld" << endl;
 		
-		for (int i = 0; i++; i == Âr)
+		for (int i = 1; i <= √•r; i++)
 		{
+			
+			rentesum = resterl√•n * renteprosent / 100;
+			avdrag = terminbelop - rentesum;
+			resterl√•n = resterl√•n - avdrag;
+			if (i == √•r)
+			{
+				resterl√•n = 0.00;
+			}
 
+			cout.precision(0);
+			cout << i << "	" << fixed << terminbelop << "		" << fixed << rentesum << "	"<< fixed << avdrag << "	"<< fixed << resterl√•n << endl;
+			
 		}
+		cout << "------------------------------------------------------------------" << endl;
+		cout << "" << endl;
+
+		// g√• tilbake til meny
+		meny();
 	}
 
 	// OPPGAVE_5: Tall som tekst
@@ -183,32 +176,44 @@ bool meny()
 		int tall;
 		cin >> tall;
 
-
+		// g√• tilbake til meny
+		meny();
 
 	}
 
 	// OPPGAVE_0: Avslutt program
 	else if (valg == '0')
 	{
-		cout << "Du valgte oppgave 0: Avslutt" << endl;
-		cout << "Programmet avslutter..." << endl;
+		cout << "\nDu valgte oppgave 0: Avslutt" << endl;
+		cout << "\nProgrammet avslutter...\n\n" << endl;
 		exit(0);
 	}
 
-	/*else
+	// Om programmet
+	else if (valg == '9') 
 	{
-		return false;
+		cout << "Du valgte: Om programmet" << endl;
+		cout << "-----------------------------" << endl;
+		cout << "Programmet er skrevet av" << endl;
+		cout << "Mikael Bendiksen" << endl;
+		cout << "og" << endl;
+		cout << "Lisa Marie S" << (char)155 << "rensen" << endl;
+		cout << "som en obligatorisk innlevering i c++ faget" << endl;
+		cout << "ved H" << (char)155 << "gskolen i Narvik" << endl;
+		cout << "15.02.2013" << endl;
+		cout << "-----------------------------" << endl;
+
+		meny();
 	}
-	return true;*/
-	
 }
 
 int main()
 {
 	while (!meny())
 	{
-		cout << "lol" << endl;
-		cout << "pr¯v igjen" << endl;
+		cout << "-------------" << endl;
+		cout << "----ERROR----" << endl;
+		cout << "-------------" << endl;
 	}
-
+	
 }
